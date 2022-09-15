@@ -1,7 +1,9 @@
 package cat.itacademy.barcelonactiva.CompanyVallet.Ernest.s04.t01.n01.S04T01N01CompanyValletErnest.controllers;
 
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -16,8 +18,8 @@ public class HelloWorldController {
     }
 
     @GetMapping({"/HelloWorld2", "/HelloWorld2/{nom}"})
-    public String saluda2(@PathVariable() Optional<String> nom) {
-        String nomRetorn = nom.orElse("UNKNOWN");
+    public String saluda2(@PathVariable(name = "nom", required = false) String nom) {
+        String nomRetorn = Objects.requireNonNullElse(nom, "UNKNOWN");
         return String.format(TEMPLATE, nomRetorn);
     }
 }
